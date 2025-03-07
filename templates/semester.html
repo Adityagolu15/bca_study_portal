@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semester {{ semester }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Semester {{ semester }}</h1>
+        <nav>
+            <a href="{{ url_for('user_dashboard') }}">Back to Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Subjects</h2>
+        <div class="subject-grid">
+            {% for subject in subjects|sort %}
+            <a href="{{ url_for('view_notes', semester=semester, subject=subject) }}" class="subject-card">
+                {{ subject }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 BCA Study Portal. All rights reserved.
+    </footer>
+</body>
+</html>

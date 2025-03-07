@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Notes</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Manage Notes</h1>
+        <nav>
+            <a href="/admin">Dashboard</a>
+            <a href="{{ url_for('manage_users') }}">Manage Users</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Upload New Note</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="semester">Semester:</label>
+            <input type="text" name="semester" required>
+        
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" required>
+        
+            <label for="topic">Topic:</label>
+            <input type="text" name="topic" required>
+        
+            <label for="file">Upload File:</label>
+            <input type="file" name="file" required>
+        
+            <button type="submit">Upload</button>
+        </form>
+        
+        <h2>Uploaded Notes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Topic</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for note in notes %}
+                <tr>
+                    <td>{{ note.subject }}</td>
+                    <td>{{ note.topic }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+</body>
+</html>

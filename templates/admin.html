@@ -1,0 +1,90 @@
+<!-- admin.html (Admin Dashboard) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="{{ url_for('manage_users') }}">Manage Users</a>
+            <a href="{{ url_for('manage_notes') }}">Manage Notes</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Statistics</h2>
+        <canvas id="notesChart" width="400" height="200"></canvas>
+        
+        <h2>Users List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Study Time (mins)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.study_time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <h2>Uploaded Notes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Topic</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for note in notes %}
+                <tr>
+                    <td>{{ note.subject }}</td>
+                    <td>{{ note.topic }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    
+    <script>
+        fetch('/admin/stats')
+            .then(response => response.json())
+            .then(data => {
+                if (data.subjects && data.notes_count) {
+                    new Chart(document.getElementById('notesChart'), {
+                        type: 'bar',
+                        data: {
+                            labels: data.subjects,
+                            datasets: [{
+                                label: 'Notes per Subject',
+                                data: data.notes_count,
+                                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: { responsive: true }
+                    });
+                } else {
+                    console.error('Invalid data format:', data);
+                }
+            })
+            .catch(error => console.error('Error fetching statistics:', error));
+    </script>
+</body>
+</html>

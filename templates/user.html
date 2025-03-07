@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ user.username }}!</h1>
+        <nav>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- Semester Selection -->
+        <h2 id="semesters">Select Semester</h2>
+        <div class="semester-grid">
+            {% for semester in semesters|sort %}
+            <a href="{{ url_for('view_semester', semester=semester) }}" class="semester-card">
+                Semester {{ semester }}
+            </a>
+            {% endfor %}
+        </div>
+
+        <!-- Study Analytics -->
+        <h2>Study Analytics</h2>
+        <div class="analytics">
+            <p>⏳ Study Time: <strong id="study-time">{{ study_time }} hours</strong></p>
+        </div>
+
+        <!-- Chatbot Section -->
+        <h2>Chatbot</h2>
+        <div id="chatbot">
+            <div id="chatlog"></div>
+            <input type="text" id="user-input" placeholder="Type your question">
+            <button onclick="askQuestion()">Ask</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 BCA Study Portal. All rights reserved.
+    </footer>
+
+    <script src="{{ url_for('static', filename='chatbot.js') }}"></script>
+    <script>
+        let studyTime = parseFloat("{{ study_time }}"); // Get initial study time from Flask
+        let startTime = Date.now(); // Store login time
+    
+        function updateStudyTime() {
+            let elapsedSeconds = (Date.now() - startTime) / 1000;
+            let elapsedHours = elapsedSeconds / 3600;
+            document.getElementById('study-time').innerText = (studyTime + elapsedHours).toFixed(2);
+        }
+    
+        setInterval(updateStudyTime, 10000); // Update study time every 10 seconds
+    </script>
+</body>
+</html>

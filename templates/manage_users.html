@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Manage Users</h1>
+        <nav>
+            <a href="/admin">Dashboard</a>
+            <a href="{{ url_for('manage_notes') }}">Manage Notes</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    
+    <main>
+        <h2>Add New User</h2>
+        <form action="/admin/users" method="POST">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+            <select name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Add User</button>
+        </form>
+        
+        <h2>Existing Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Study Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>{{ user.study_time if user.study_time else '0' }} min</td>
+                    <td>
+                        <button onclick="showUserOptions('{{ user.id }}', '{{ user.username }}', '{{ user.password }}')">Manage</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Popup for User Options -->
+    <div id="userOptionsPopup" class="popup">
+        <div class="popup-content">
+            <h3>Manage User</h3>
+            <p id="popupUserName"></p>
+            <button onclick="seePassword()" class="popup-button">See Password</button>
+            <form id="deleteUserForm" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                <button type="submit" class="popup-button delete">Delete User</button>
+            </form>
+            <button onclick="closePopup()" class="popup-button close">Close</button>
+        </div>
+    </div>
+
+    <!-- CSS for Popup -->
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .popup-content {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .popup-button {
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .popup-button.delete {
+            background-color: red;
+            color: white;
+        }
+
+        .popup-button.close {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+
+    <!-- JavaScript for Popup -->
+    <script>
+        let currentPassword = "";
+
+        function showUserOptions(userId, username, password) {
+            document.getElementById("popupUserName").innerText = "Manage: " + username;
+            document.getElementById("deleteUserForm").action = "/delete_user/" + userId;
+            document.getElementById("userOptionsPopup").style.display = "block";
+            currentPassword = password; // Store password
+        }
+
+        function seePassword() {
+            alert("User Password: " + currentPassword);
+        }
+
+        function closePopup() {
+            document.getElementById("userOptionsPopup").style.display = "none";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA Study Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Styles for Group Details Section */
+/* Group Details Section Styling */
+.group-details {
+    padding: 30px;
+    background-color: #f9f9f9;
+}
+
+.group-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.support-details, .team-details {
+    width: 100%;
+    max-width: 500px;
+    flex: 1;
+}
+
+.group-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.group-card ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.group-card ul li {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 12px 0;
+}
+
+.group-card ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.group-card ul li a:hover {
+    color: #0056b3;
+}
+
+/* Icon Styling */
+.icon {
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Team List Styling */
+.team-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.team-list a {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.team-list a::after {
+    content: "Click here for LinkedIn";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.team-list a:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+.team-member{
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+.team-member:hover {
+    background-color: #007bff;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2);
+}
+
+
+.team-member strong {
+    font-size: 20px;
+}
+
+.team-member::before {
+    content: '👨‍💻'; /* Optional emoji icon before each name */
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .group-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .support-details, .team-details {
+        max-width: 100%;
+    }
+
+    .group-card ul li {
+        font-size: 16px;
+    }
+}
+
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to BCA Study Portal</h1>
+        <nav>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </nav>
+    </header>
+    
+    <!-- Banner Video Section -->
+    <section class="banner">
+        <video autoplay loop muted playsinline>
+            <source src="{{ url_for('static', filename='banner.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
+    
+    <div class="container">
+        <p>Your one-stop solution for BCA study materials and assistance.</p>
+    </div>
+
+     <!-- Group Details Section -->
+     <!-- Group Details Section -->
+<section class="group-details">
+    <h2>Project Built By:</h2>
+
+    <div class="group-container">
+        <!-- Left Section: Support Details -->
+        <div class="support-details">
+            <div class="group-card">
+                <ul>
+                    <li><strong>Group Name:</strong> BCA Study Portal Development Team</li>
+                    <li>
+                        <strong>For any issue:</strong>
+                        </li>
+                    <li>    
+                        <strong>Email:</strong> 
+                        <a href="mailto:goluaditya15@gmail.com">
+                            <img src="https://img.icons8.com/material/24/000000/email.png" alt="email icon" class="icon"> 
+                            goluaditya15@gmail.com
+                        </a>
+                    </li>
+                    <li>
+                        <strong>Phone:</strong> 
+                        <a href="tel:+918797330326">
+                            <img src="https://img.icons8.com/material/24/000000/phone.png" alt="phone icon" class="icon"> 
+                            +91-8797330326
+                        </a>
+                    </li>
+                    <li>
+                        <strong>WhatsApp:</strong> 
+                        <a href="https://wa.me/+918797330326">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="whatsapp icon" class="icon"> 
+                            +91-8797330326
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Section: Team Details -->
+        <div class="team-details">
+            <h3>Meet the Team:</h3>
+            <ul class="team-list">
+                <li class="team-member"><a href="https://surl.gd/vknrah" target="_blank" title="Click here for LinkedIn">1. <strong>Aditya Srivastava</strong></a></li>
+                <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">2. <strong>Golu Kumar</strong></a></li>
+                <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">3. <strong>Ishant Kumar</strong></a></li>
+                <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">4. <strong>Nishant Raj</strong></a></li>
+                <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">5. <strong>Gautam Kumar</strong></a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+    
+    <footer>
+        &copy; 2023 BCA Study Portal. All rights reserved.
+    </footer>
+</body>
+</html>

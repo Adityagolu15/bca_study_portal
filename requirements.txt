@@ -3,6 +3,5 @@ flask_sqlalchemy
 flask_login
 flask_wtf
 wtforms
-sqlite3
 requests
 gunicorn

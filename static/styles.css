@@ -94,13 +94,30 @@ form {
     padding: 25px;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    max-width: 500px;
+    max-width: 600px;
     margin: 50px auto;
     backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden; /* Prevents image overflow */
 }
 
-form input, form select, form button {
+/* Background image inside form */
+form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 100%;
+    background: url('form-background.jpg') center/cover no-repeat; /* Replace with your image */
+    filter: blur(1px); /* Blurred effect */
+    opacity: 1; /* Controls visibility */
+    z-index: -1;
+}
+
+/* Input fields and button */
+form input, form select, form button {
+    width: 95%;
     padding: 12px;
     margin: 12px 0;
     border: 2px solid rgba(0, 123, 255, 0.3);
@@ -113,6 +130,14 @@ form input:focus {
     border-color: #007bff;
 }
 
+/* Centering the button */
+form .button-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+
 /* Button Styling */
 button {
     padding: 12px 20px;
@@ -124,6 +149,7 @@ button {
     font-size: 1.1rem;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
+    width: 100%; /* Adjust width if needed */
 }
 
 button:hover {
@@ -131,6 +157,7 @@ button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Notes Section */
 .notes-grid {

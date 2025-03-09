@@ -71,6 +71,8 @@ def login():
             db.session.commit()
             
             return redirect(url_for('admin_dashboard' if user.role == 'admin' else 'user_dashboard'))
+        else:
+            flash("Invalid username or password!", "error")  # Flash message
 
     return render_template('login.html')
 

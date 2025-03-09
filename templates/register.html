@@ -15,7 +15,9 @@
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             
-            <button type="submit">Register</button>
+            <div class="button-container">
+                <button type="submit">Register</button>
+            </div>
         </form>
         <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
     </div>

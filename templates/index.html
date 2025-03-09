@@ -6,6 +6,61 @@
     <title>BCA Study Portal</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
+        /* Landing Page Styles */
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.7), rgba(0, 198, 255, 0.7)), url("{{ url_for('static', filename='background.png') }}") no-repeat center center/cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+            transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+        }
+        .landing-page h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .landing-page p {
+            font-size: 1.5rem;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+        .start-btn {
+            padding: 15px 30px;
+            font-size: 22px;
+            background: white;
+            color: #007bff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            margin-top: 20px;
+            animation: fadeIn 3s ease-in-out;
+            width: 10% !important;
+        }
+        .start-btn:hover {
+            background-color: #e6e6e6;
+            transform: scale(1.1);
+        }
+        .hidden {
+            transform: translateY(-100vh);
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }@keyframes fadeInContent {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         /* Styles for Group Details Section */
 /* Group Details Section Styling */
 .group-details {
@@ -159,6 +214,13 @@
     </style>
 </head>
 <body>
+    <div class="landing-page" id="landing">
+        <h1>Welcome to BCA Study Portal</h1>
+        <p>Your one-stop solution for BCA study materials and assistance.</p>
+        <button class="start-btn" onclick="startExperience()">Start</button>
+    </div>
+
+    <div id="main-content" class="fade-in">
     <header>
         <h1>Welcome to BCA Study Portal</h1>
         <nav>
@@ -176,10 +238,10 @@
     </section>
     
     <div class="container">
-        <p>Your one-stop solution for BCA study materials and assistance.</p>
+        <p align="center">Your one-stop solution for BCA study materials and assistance.</p>
     </div>
 
-     <!-- Group Details Section -->
+
      <!-- Group Details Section -->
 <section class="group-details">
     <h2>Project Built By:</h2>
@@ -225,8 +287,9 @@
                 <li class="team-member"><a href="https://surl.gd/vknrah" target="_blank" title="Click here for LinkedIn">1. <strong>Aditya Srivastava</strong></a></li>
                 <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">2. <strong>Golu Kumar</strong></a></li>
                 <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">3. <strong>Ishant Kumar</strong></a></li>
-                <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">4. <strong>Nishant Raj</strong></a></li>
+                <li class="team-member"><a href="https://surl.li/vqphrd" target="_blank" title="Click here for LinkedIn">4. <strong>Nishant Raj</strong></a></li>
                 <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">5. <strong>Gautam Kumar</strong></a></li>
+                <li class="team-member"><a href="/" target="_blank" title="Click here for LinkedIn">6. <strong>Soumya Singh</strong></a></li>
             </ul>
         </div>
     </div>
@@ -236,5 +299,11 @@
     <footer>
         &copy; 2023 BCA Study Portal. All rights reserved.
     </footer>
+    </div>
+    <script>
+        function startExperience() {
+            document.getElementById("landing").classList.add("hidden");
+        }
+    </script>
 </body>
 </html>

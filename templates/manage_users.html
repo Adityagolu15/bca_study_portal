@@ -25,7 +25,9 @@
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
             </select>
-            <button type="submit">Add User</button>
+            <div class="button-container">
+                <button type="submit">Add User</button>
+            </div>
         </form>
         
         <h2>Existing Users</h2>
@@ -45,7 +47,9 @@
                     <td>{{ user.role }}</td>
                     <td>{{ user.study_time if user.study_time else '0' }} min</td>
                     <td>
-                        <button onclick="showUserOptions('{{ user.id }}', '{{ user.username }}', '{{ user.password }}')">Manage</button>
+                        <div class="button-container">
+                            <button onclick="showUserOptions('{{ user.id }}', '{{ user.username }}', '{{ user.password }}')">Manage</button>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
